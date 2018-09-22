@@ -6,32 +6,21 @@ from pyautogui import click
 from tkinter import *
 from tkinter.messagebox import showinfo
 from multiprocessing import Process
-#Flag used to checking if the button was triggered for starting or stopping
-#Doesn't really work as of now.
-flag = False
-button_state = 'normal'
 
 def Help():
     showinfo(title='Help', message="Default value for minimum is: 1 second. For maximum it's: 5 seconds")
 
 def intestines():
-    global flag
-
-    time.sleep(1)
-
-    if flag == False:
-        flag = True
-    else:
-        flag = False
-
     try:
-        min = int(entry1['textvariable'])
+        min = float(entry1.get())
     except ValueError:
         min = 0
     try:
-        max = int(entry2['textvariable']) + 1
+        max = float(entry2.get())
     except ValueError:
         max = 6
+
+    time.sleep(1)
 
     if min > max:
         showinfo(title="Error", message="Maximum value is smaller than minimum value.")
@@ -40,10 +29,10 @@ def intestines():
         pass
 
     while True:
-        i = 0
-        time_ = (20 + random.randint(min, max)) / 10
-        for i in range(0, time_):
-            time.sleep(1)
+        time_ = random.uniform(min, max)
+        print(time_)
+        time.sleep(time_)
+        #time.sleep(random.uniform(min, max))
         click()
 
 def clicki():
@@ -87,12 +76,6 @@ def clickerino():
     entry2.grid(row=1, column=1)
     button_quit.grid(row=3, column=1)
     button_help.grid(row=2, column=1)
-    clickit = Process(group=None,
-                      target=intestines,
-                      name=None,
-                      args=(),
-                      kwargs={}
-                      )
     button_click.grid(row=2, column=0)
 
     win.mainloop()
