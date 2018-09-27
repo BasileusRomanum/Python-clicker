@@ -14,7 +14,7 @@ def intestines():
     try:
         min = float(entry1.get())
     except ValueError:
-        min = 0
+        min = 1
     try:
         max = float(entry2.get())
     except ValueError:
@@ -29,10 +29,7 @@ def intestines():
         pass
 
     while True:
-        time_ = random.uniform(min, max)
-        print(time_)
-        time.sleep(time_)
-        #time.sleep(random.uniform(min, max))
+        time.sleep(random.uniform(min, max))
         click()
 
 def clicki():
